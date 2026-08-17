@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WinCompass-Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>WinCompass-Dashboard</h1>
+
+        <div class="card">
+            <div class="actions"style="margin-bottom:20px;">Quick actions</div>
+            
+            <div class="actions-grid">
+            <button class="action-btn" onclick="createSkill()">
+                <span class="btn-title">Create Skill Requirements</span>
+                <span class="btn-desc">Define a new required skill</span>
+            </button>
+
+            <div id="skillForm" style="display:none;">
+                <ul><input type="text" id="category" placeholder="Category" style="margin-bottom: 5px;" oninput="toggleFields()"></ul>
+                
+                <ul><input type="text" id="skillName" placeholder="Skill Name" ></ul>
+                <ul><input type="text" id="duration" placeholder="Duration"></ul>
+                <ul id="toolsField" style="display: none;"><input type="text" id="tools" placeholder="Tools"></ul>
+                <ul id="dbField" style="display: none;"><input type="text" id="db" placeholder="Database"></ul>
+                <script>
+                    function toggleFields() {
+                    const category = document.getElementById("category").value;
+
+                    document.getElementById("toolsField").style.display = "none";
+                    document.getElementById("dbField").style.display = "none";
+                    if (category === "AppDev") {
+                    document.getElementById("toolsField").style.display = "block";
+                    }
+                    else if (category === "DataAndAnalytics") {
+                    document.getElementById("dbField").style.display = "block";
+                    }
+                    }
+                    
+                </script>
+
+                <ul>
+                    <button onclick="saveSkill()">Save Skill</button>
+                </ul>
+            </div>
+                <button class="action-btn" onclick="showBulkSection()">
+                    <span class="btn-title">Bulk insert</span>
+                    <span class="btn-desc">Import multiple skills at once</span>
+                </button>
+
+                <button class="action-btn" onclick="feedback()">
+                    <span class="btn-title">Create feedback request</span>
+                    <span class="btn-desc">Ask a reviewer for feedback</span>
+                </button>
+            </div>
+        </div>
+
+    <div class="card" style="margin-top: 20px;">
+        <div class="quickactions">Imported Skills List</div>
+        <ul id="skillsList">
+        </ul>
+    </div>
+    <!-- Feedback Section -->
+<div class="feedback-section">
+
+    <h2>Employee Feedback</h2>
+
+    <label for="employeeName">Employee Name</label>
+    <input
+        type="text"
+        id="employeeName"
+        placeholder="Enter employee name">
+
+    <label for="feedbackText">Feedback</label>
+    <textarea
+        id="feedbackText"
+        placeholder="Enter your feedback"></textarea>
+
+    <button class="submit-btn" id="feedback-btn">Submit Feedback</button>
+
+    <p id="feedbackMessage"></p>
+
+</div>
+    <script src="script.js"></script>
+</body>
+</html>
